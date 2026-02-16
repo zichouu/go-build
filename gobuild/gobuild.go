@@ -16,13 +16,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	dirList := []string{"."}
+	buildDirList := []string{"."}
 	if len(os.Args) >= 2 {
-		dirList = os.Args[1:]
+		buildDirList = os.Args[1:]
 	}
 
 	var g errgroup.Group
-	for _, v := range dirList {
+	for _, v := range buildDirList {
 		g.Go(func() error {
 			err := Build(v)
 			return err
