@@ -38,7 +38,7 @@ func Build(dir string) error {
 			envGOOS := fmt.Sprintf("GOOS=%v", v.GOOS)
 			envGOARCH := fmt.Sprintf("GOARCH=%v", v.GOARCH)
 			o := fmt.Sprintf("build/%v-%v/", v.GOOS, v.GOARCH)
-			arg := []string{"go", "build", "-trimpath", "-ldflags", "-s -w", "-o", o, "./..."}
+			arg := []string{"go", "build", "-trimpath", "-ldflags", `"-s -w"`, "-o", o, "./..."}
 			err := exe.Run(dir, []string{envGOOS, envGOARCH, "CGO_ENABLED=0"}, arg...)
 			return err
 		})
