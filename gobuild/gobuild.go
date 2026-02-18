@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"os/exec"
 
@@ -28,7 +29,10 @@ func main() {
 			return err
 		})
 	}
-	g.Wait()
+	err = g.Wait()
+	if err != nil {
+		slog.Error("Build err", "err", err)
+	}
 }
 
 func Build(dir string) error {
