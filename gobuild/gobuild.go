@@ -39,11 +39,13 @@ func Build(dir string) error {
 	var g errgroup.Group
 	for _, v := range Ver {
 		g.Go(func() error {
+			envCGO := "CGO_ENABLED=0"
 			envGOOS := fmt.Sprintf("GOOS=%v", v.GOOS)
 			envGOARCH := fmt.Sprintf("GOARCH=%v", v.GOARCH)
 			o := fmt.Sprintf("build/%v-%v/", v.GOOS, v.GOARCH)
+			aenv := []string{envGOOS, envGOARCH, envCGO}
 			arg := []string{"go", "build", "-trimpath", "-ldflags", `"-s -w"`, "-o", o, "./..."}
-			err := exe.Run(dir, []string{envGOOS, envGOARCH, "CGO_ENABLED=0"}, arg...)
+			err := exe.Run(dir, aenv, arg...)
 			return err
 		})
 	}
