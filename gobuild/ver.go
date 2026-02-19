@@ -12,4 +12,5 @@ var Ver = []Versions{
 	{GOOS: "darwin", GOARCH: "amd64"},
 	{GOOS: "android", GOARCH: "arm64"},
 	{GOOS: "windows", GOARCH: "amd64"},
+	{GOOS: "windows", GOARCH: "arm64"},
 }
