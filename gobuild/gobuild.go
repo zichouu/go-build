@@ -5,8 +5,11 @@ import (
 	"log/slog"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"strings"
 
 	"github.com/zichouu/go-pkg/exe"
+	"github.com/zichouu/go-pkg/file"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -42,10 +45,34 @@ func Build(dir string) error {
 			envCGO := "CGO_ENABLED=0"
 			envGOOS := fmt.Sprintf("GOOS=%v", v.GOOS)
 			envGOARCH := fmt.Sprintf("GOARCH=%v", v.GOARCH)
-			o := fmt.Sprintf("build/%v-%v/", v.GOOS, v.GOARCH)
+			buildDir := "build"
+			link := "_"
+			osArch := fmt.Sprintf("%v%v%v", v.GOOS, link, v.GOARCH)
+			o := fmt.Sprintf("%v/%v/", buildDir, osArch)
 			aenv := []string{envGOOS, envGOARCH, envCGO}
 			arg := []string{"go", "build", "-trimpath", "-ldflags", `"-s -w"`, "-o", o, "./..."}
 			err := exe.Run(dir, aenv, arg...)
+			if err != nil {
+				return err
+			}
+			files, err := os.ReadDir(o)
+			if err != nil {
+				return err
+			}
+			for _, v := range files {
+				name := v.Name()
+				ext := ""
+				if strings.HasSuffix(v.Name(), ".exe") {
+					name = strings.Split(v.Name(), ".exe")[0]
+					ext = ".exe"
+				}
+				src := filepath.Join(buildDir, osArch, v.Name())
+				dst := filepath.Join(buildDir, fmt.Sprintf("%v%v%v%v", name, link, osArch, ext))
+				err = file.Copy(src, dst)
+				if err != nil {
+					return err
+				}
+			}
 			return err
 		})
 	}
