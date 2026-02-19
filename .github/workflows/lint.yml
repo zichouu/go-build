@@ -6,7 +6,7 @@ on:
   pull_request:
   workflow_dispatch:
 jobs:
-  Lint:
+  lint:
     uses: zichouu/actions/.github/workflows/go-lint.yml@main
     permissions:
         contents: write
