@@ -55,7 +55,7 @@ func Build(dir string) error {
 			if err != nil {
 				return err
 			}
-			files, err := os.ReadDir(o)
+			files, err := os.ReadDir(filepath.Join(dir, o))
 			if err != nil {
 				return err
 			}
@@ -66,8 +66,8 @@ func Build(dir string) error {
 					name = strings.Split(v.Name(), ".exe")[0]
 					ext = ".exe"
 				}
-				src := filepath.Join(buildDir, osArch, v.Name())
-				dst := filepath.Join(buildDir, fmt.Sprintf("%v%v%v%v", name, link, osArch, ext))
+				src := filepath.Join(dir, buildDir, osArch, v.Name())
+				dst := filepath.Join(dir, buildDir, fmt.Sprintf("%v%v%v%v", name, link, osArch, ext))
 				err = file.Copy(src, dst)
 				if err != nil {
 					return err
