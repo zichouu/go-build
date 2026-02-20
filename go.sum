@@ -1,4 +1,6 @@
 github.com/zichouu/go-pkg v0.4.0 h1:DCmuaeonJd0AGY9KtdFhCbS+6eVUCnxBV13oeIgt+2A=
 github.com/zichouu/go-pkg v0.4.0/go.mod h1:Ljorfq0e00tNU0r6o6/XcFA/UIYVlKNxGkHRBEeqW0M=
+github.com/zichouu/go-pkg v0.4.2 h1:TNbYBbD4PtwI1LhSkJpN9KP0fO+x9HIyGVxIhBCPWQs=
+github.com/zichouu/go-pkg v0.4.2/go.mod h1:Ljorfq0e00tNU0r6o6/XcFA/UIYVlKNxGkHRBEeqW0M=
 golang.org/x/sync v0.19.0 h1:vV+1eWNmZ5geRlYjzm2adRgW2/mcpevXNg50YZtPCE4=
 golang.org/x/sync v0.19.0/go.mod h1:9KTHXmSnoGruLpwFjVSX0lNNA75CykiMECbovNTZqGI=
