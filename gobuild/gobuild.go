@@ -51,7 +51,7 @@ func Build(dir string) error {
 			o := fmt.Sprintf("%v/%v/", buildDir, osArch)
 			aenv := []string{envGOOS, envGOARCH, envCGO}
 			arg := []string{"go", "build", "-trimpath", "-ldflags", `"-s -w"`, "-o", o, "./..."}
-			err := exe.Run(dir, aenv, arg...)
+			_, err := exe.Run(dir, aenv, arg...)
 			if err != nil {
 				return err
 			}
